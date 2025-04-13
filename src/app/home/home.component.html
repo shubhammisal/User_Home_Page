@@ -1,0 +1,46 @@
+
+<div class="main">
+    <div class="navBar">
+        <div class="topBar">
+            <img src="assets/svg/navbar/home.svg" alt="Home">
+            <img src="assets/svg/navbar/books.svg" alt="">
+            <img src="assets/svg/navbar/database.svg" alt="">
+            <img src="assets/svg/navbar/addCheck.svg" alt="">
+            <img src="assets/svg/navbar/pieChart.svg" alt="">
+            <img src="assets/svg/navbar/people.svg" alt="">
+        </div>
+        <div class="topBar">
+            <img src="assets/svg/navbar/donut.svg" alt="">
+            <img src="assets/svg/navbar/settings.svg" alt="">
+            <div class="profile">
+                <span>
+                    {{FirstName[0].toUpperCase()}}{{LastName[0].toUpperCase()}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="home">
+        <div class="heading">
+            <h2>
+                Welcome Back , {{FirstName}}
+            </h2> 
+            <div class="sideButtons">
+                <img src="assets/svg/search.svg" alt="">
+                <button>
+                    <img src="assets/svg/customize.svg" alt="">
+                    Customize
+                </button>
+                <button>
+                    <img src="assets/svg/export.svg" alt="">
+                    Export
+                </button>
+            </div>
+        </div>
+        <div>
+            <app-widgets></app-widgets>
+        </div>
+        <div>
+            <app-users></app-users>
+        </div>
+    </div>
+</div>

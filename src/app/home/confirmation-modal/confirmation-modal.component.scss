@@ -1,0 +1,23 @@
+
+.modalBody{
+    height:200px;
+    width: 500px;
+    background-color: white;
+    border: 1px solid #cccfd5;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+
+    .modalData{
+        flex: 1;
+    }
+
+    .modalFooter{
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        button{
+            margin: 0px 10px;
+        }
+    }
+}

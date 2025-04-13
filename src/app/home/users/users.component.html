@@ -1,0 +1,123 @@
+<div class="users">
+    <div class="heading">
+        <div class="headers">
+            <h4>Team Members</h4>
+            <span class="headerLabel">
+                {{count}} users
+            </span>
+        </div>
+        <img src="assets/svg/moreVert.svg" alt="">
+    </div>
+
+<ng-container *ngIf="!isLoading else Loader">
+    <div class="userTable">
+        <table>
+            <thead>
+              <tr>
+                <th class="selectUser"> 
+                    <input type="checkbox" [checked]="selectAll"  (click)="selectAllUsers()" >
+                </th>
+                <th *ngFor="let col of gridCol" [style.text-align]="col.align">
+                    {{col['column_name']}}
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+                <tbody>
+                    <tr *ngFor="let data of userData; let i=index">
+                        <td class="selectUser">
+                            <input type="checkbox" [(ngModel)]="data['selected']"/>
+                        </td>
+                        <td *ngFor="let col of gridCol ">
+                            <ng-container [ngSwitch]="col.type">
+                                <div *ngSwitchCase="'name'" class="userName">
+                                    <div class="profile">
+                                        <span>
+                                            {{data[col.column_key]?.first_name[0].toUpperCase()}}{{data[col.column_key]?.last_name[0].toUpperCase()}}
+                                        </span>
+                                    </div>
+                                    <div class="names">
+                                        <span class="fullname">
+                                            {{data[col.column_key]?.first_name}} {{data[col.column_key]?.last_name}}
+                                        </span>
+                                        <span class="handle">
+                                            {{data[col.column_key]?.handle}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div *ngSwitchCase="'status'">
+                                    <span class="status" [style.color]="data[col.column_key]=== 'Customer'? '#54af72':'#677084'">
+                                        <span class="circle"
+                                         [style.background-color]="data[col.column_key]=== 'Customer'? '#54af72':'#677084'"></span>
+                                        {{ data[col.column_key] }}
+                                    </span>
+                                </div>
+                        
+                                  <span *ngSwitchCase="'text'" class="role">
+                                    {{ data[col.column_key] }}
+                                  </span>
+                        
+                                  <div *ngSwitchCase="'progress'" class="progres">
+                                    <div class="progressBar">
+                                      <div class="bar"
+                                        [style.width.%]="data[col.column_key]">
+                                      </div>
+                                    </div>
+                                    <span class="percent">{{ data[col.column_key] }}%</span>
+                                  </div>
+                        
+                                  <div *ngSwitchCase="'tags'" class="tags">
+                                    <span class="tag" *ngFor="let tag of data[col.column_key]"
+                                    [style.color]="tag.text_color"
+                                    [style.background-color]="tag.background_color">
+                                      {{ tag.value }}
+                                    </span>
+                                  </div>
+
+                                  <div *ngSwitchDefault>
+                                    {{ data[col.column_key]}}
+                                  </div>
+                            </ng-container>
+                        </td>
+                        <td class="actionButtons">
+                                <img src="assets/svg/delete.svg" alt="" (click)="onDelete(data ,i)">
+                                <img src="assets/svg/edit.svg" alt="" (click)="onEdit(data,i)">
+                        </td>
+                    </tr>
+                </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <div>
+            <button (click)="pageNumber-1 >= 1 ? pageChange(pageNumber-1) : null">
+                <img src="assets/svg/leftArraw.svg" alt="">
+                Preview
+            </button>
+        </div>
+        <div class="pages">
+            <span *ngFor="let page of [].constructor(pageCount); let i=index"
+            (click)="pageChange(i+1)" [style.color]="pageNumber === (i+1) ? '#2c2a2a':'#9a8686'">
+                {{i+1}}
+            </span>
+
+        </div>
+        <div>
+            <button (click)="pageNumber+1 <= pageCount ? pageChange(pageNumber+1) : null">
+                Next
+                <img src="assets/svg/rightArrow.svg" alt="">
+            </button>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #Loader>
+    <div class="userTable">
+        <div class="loader">
+            <img src="assets/svg/Loader.svg" alt="Loading">
+        </div>
+    </div>
+</ng-template>
+
+</div>
